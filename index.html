@@ -1,94 +1,97 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StatusPT - Status Vivo</title>
+    
+    <title>StatusPT - Vigilância Ativa das Infraestruturas Nacionais</title>
+    <meta name="description" content="Monitorização comunitária em tempo real de todos os serviços essenciais em Portugal.">
+    
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Lexend:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <style>
-        :root { --bg-body: #f8f9fa; --bg-card: #ffffff; --text-main: #1a1a1a; --border: #e9ecef; --nav-bg: #212121; }
-        body.dark-mode { --bg-body: #0a0a0a; --bg-card: #141414; --text-main: #f8f9fa; --border: #2d2d2d; --nav-bg: #111; }
-        
-        body { font-family: 'Lexend', sans-serif; background-color: var(--bg-body); color: var(--text-main); transition: 0.4s; display: flex; min-height: 100vh; flex-direction: column; }
-        main { flex: 1 0 auto; }
-
-        nav { background-color: var(--nav-bg) !important; box-shadow: none; border-bottom: 1px solid var(--border); padding: 0 20px; }
-        .brand-logo { font-family: 'Syncopate', sans-serif; font-weight: 700; letter-spacing: 2px; }
-
-        .hero-search { padding: 80px 0 120px 0; background: var(--bg-card); border-bottom: 1px solid var(--border); }
-        .hero-title-container { margin-left: 15%; }
-        .hero-title-animated { 
-            font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: 12px; font-size: 3.5rem; margin: 0; font-weight: 700;
-            background: linear-gradient(90deg, #1a1a1a, #2196f3, #f44336, #1a1a1a); background-size: 200% auto;
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 5s linear infinite;
-        }
-        .hero-tagline { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: #888; margin-top: 5px; }
-        @keyframes shine { to { background-position: 200% center; } }
-
-        .fixed-action-btn { overflow: visible !important; bottom: 45px !important; right: 45px !important; }
-        .btn-agressivo { background: linear-gradient(45deg, #ff0000, #b71c1c) !important; position: relative; z-index: 10; border: none; }
-        .btn-agressivo::before, .btn-agressivo::after {
-            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 100%; height: 100%; background: rgba(255, 0, 0, 0.6); border-radius: 50%; z-index: -1;
-        }
-        .btn-agressivo::before { animation: pulse-agressivo 1.5s infinite; }
-        .btn-agressivo::after { animation: pulse-agressivo 1.5s 0.7s infinite; }
-        @keyframes pulse-agressivo { 0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; } 100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0; } }
-
-        .status-card { background: var(--bg-card); border: 2px solid var(--border); padding: 40px 10px; border-radius: 24px; transition: 0.3s; margin-top: -60px; }
-        .operational { color: #2e7d32; border-color: #2e7d32; }
-        .warning { color: #f57c00; border-color: #f57c00; }
-        .outage { color: #d32f2f; border-color: #d32f2f; }
-
-        .report-icon-btn { cursor: pointer; padding: 20px 10px; border: 2px solid transparent; border-radius: 16px; transition: 0.3s; color: var(--text-main); background: rgba(0,0,0,0.03); margin-bottom: 10px; }
-        .report-icon-btn.active { border-color: #2196f3; background: rgba(33, 150, 243, 0.15); color: #2196f3; }
-        .modal { background-color: var(--bg-card) !important; border-radius: 25px !important; color: var(--text-main) !important; }
-
-        .page-footer { background-color: var(--nav-bg) !important; padding-top: 40px; border-top: 1px solid var(--border); }
-        .footer-logo { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: 2px; display: block; margin-bottom: 15px; }
-
-        @media (max-width: 992px) {
-            .hero-title-container { margin-left: 5%; }
-            .hero-title-animated { font-size: 2.2rem; letter-spacing: 6px; }
-            .status-card { margin-top: 20px; }
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">STATUS PT</a>
-            <ul class="right">
+            <a href="#" class="brand-logo hide-on-med-and-down">STATUS PT</a>
+            <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
                 <li><a href="#" onclick="toggleTheme()"><i class="material-icons">brightness_4</i></a></li>
+                <li><a href="#!"><i class="material-icons">map</i></a></li>
             </ul>
         </div>
     </nav>
 
+    <div class="alert-bar">
+        Plataforma ainda muito instável. Disponível somente para Lisboa. Estamos a trabalhar para alargar a todo o país.
+    </div>
+
+    <ul class="sidenav" id="mobile-menu">
+        <li><div class="user-view" style="padding: 32px 32px 0;"><span class="name" style="font-family: 'Syncopate'; font-weight: 700;">STATUS PT</span></div></li>
+        <li><div class="divider"></div></li>
+        <li><a href="#!" onclick="toggleTheme()"><i class="material-icons">brightness_4</i>Mudar Tema</a></li>
+        <li><a href="#!"><i class="material-icons">map</i>Mapa de Falhas</a></li>
+    </ul>
+
     <main>
         <div class="hero-search">
-            <div class="hero-title-container">
-                <h1 class="hero-title-animated">Status<br>Vivo</h1>
-                <p class="hero-tagline">Vigilância ativa das infraestruturas nacionais</p>
-            </div>
-            <div class="container" style="margin-top: 60px;">
-                <div class="row">
-                    <div class="input-field col s12 m4"><select id="distrito"></select></div>
-                    <div class="input-field col s12 m4"><select id="concelho"></select></div>
-                    <div class="input-field col s12 m4"><select id="vila"></select></div>
+            <div class="hero-search-container">
+                <div class="hero-title-container">
+                    <h1 class="hero-title-main">Estado dos Serviços em Tempo Real</h1>
+                    <p class="hero-subtitle" style="color: var(--text-main); opacity: 0.7; font-size: 1.2rem; margin-top: 10px;">
+                        A plataforma comunitária que monitoriza a luz, água e comunicações na tua rua.
+                    </p>
+                </div>
+                
+                <div class="container" style="margin-top: 60px;">
+                    <div class="row">
+                        <div class="input-field col s12 m4"><select id="distrito"></select></div>
+                        <div class="input-field col s12 m4"><select id="concelho"></select></div>
+                        <div class="input-field col s12 m4"><select id="vila"></select></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="container">
+        <div class="container container-cards">
             <div class="row">
-                <div class="col s12 m6 l3"><div id="card-luz" class="status-card center-align operational"><i class="material-icons">flash_on</i><h6>LUZ</h6><b id="status-text-luz">OPERACIONAL</b></div></div>
-                <div class="col s12 m6 l3"><div id="card-agua" class="status-card center-align operational"><i class="material-icons">opacity</i><h6>ÁGUA</h6><b id="status-text-agua">OPERACIONAL</b></div></div>
-                <div class="col s12 m6 l3"><div id="card-net" class="status-card center-align operational"><i class="material-icons">router</i><h6>NET</h6><b id="status-text-net">OPERACIONAL</b></div></div>
-                <div class="col s12 m6 l3"><div id="card-movel" class="status-card center-align operational"><i class="material-icons">phone_in_talk</i><h6>MÓVEL</h6><b id="status-text-movel">OPERACIONAL</b></div></div>
+                <div class="col s12 m6 l3">
+                    <div id="card-luz" class="status-card center-align waiting">
+                        <i class="material-icons">flash_on</i>
+                        <h6>LUZ</h6>
+                        <b id="status-text-luz">SELECIONE LOCAL</b>
+                        <div class="chart-container"><canvas id="chart-luz"></canvas></div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l3">
+                    <div id="card-agua" class="status-card center-align waiting">
+                        <i class="material-icons">opacity</i>
+                        <h6>ÁGUA</h6>
+                        <b id="status-text-agua">SELECIONE LOCAL</b>
+                        <div class="chart-container"><canvas id="chart-agua"></canvas></div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l3">
+                    <div id="card-net" class="status-card center-align waiting">
+                        <i class="material-icons">router</i>
+                        <h6>NET</h6>
+                        <b id="status-text-net">SELECIONE LOCAL</b>
+                        <div class="chart-container"><canvas id="chart-net"></canvas></div>
+                    </div>
+                </div>
+                <div class="col s12 m6 l3">
+                    <div id="card-movel" class="status-card center-align waiting">
+                        <i class="material-icons">phone_in_talk</i>
+                        <h6>MÓVEL</h6>
+                        <b id="status-text-movel">SELECIONE LOCAL</b>
+                        <div class="chart-container"><canvas id="chart-movel"></canvas></div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -96,133 +99,59 @@
     <footer class="page-footer">
         <div class="container">
             <div class="row">
-                <div class="col l6 s12">
-                    <span class="white-text footer-logo">STATUS PT</span>
-                    <p class="grey-text text-lighten-4">Monitorização comunitária em tempo real. Zelamos pela transparência e pelo funcionamento das nossas localidades.</p>
+                <div class="col l4 s12">
+                    <span class="white-text" style="font-family: 'Syncopate'; letter-spacing: 2px;">STATUS PT</span>
+                    <p class="grey-text text-lighten-4">Monitorização independente comunitária.</p>
                 </div>
-                <div class="col l4 offset-l2 s12">
-                    <h6 class="white-text">Links</h6>
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Sobre</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Mapa de Ocorrências</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Contacto</a></li>
+                <div class="col l2 offset-l1 s6">
+                    <span class="white-text" style="font-weight: 600;">SERVIÇOS</span>
+                    <ul class="footer-links">
+                        <li><a href="pages/electricity.html">Eletricidade</a></li>
+                        <li><a href="pages/water.html">Água</a></li>
+                        <li><a href="pages/communications.html">Comunicações</a></li>
+                    </ul>
+                </div>
+                <div class="col l2 s6">
+                    <span class="white-text" style="font-weight: 600;">PROJETO</span>
+                    <ul class="footer-links">
+                        <li><a href="#!">Sobre</a></li>
+                        <li><a href="#!">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <span class="white-text" style="font-weight: 600;">LEGAL</span>
+                    <ul class="footer-links">
+                        <li><a href="#!">Privacidade</a></li>
+                        <li><a href="#!">Termos</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="footer-copyright">
-            <div class="container center-align">
-                © 2026 STATUS PT - Portugal
-            </div>
-        </div>
+        <div class="footer-copyright"><div class="container center-align grey-text">© 2026 STATUS PT - Portugal.</div></div>
     </footer>
-
-    <div class="fixed-action-btn"><a class="btn-floating btn-large btn-agressivo modal-trigger" href="#modalReporte"><i class="large material-icons">priority_high</i></a></div>
-
-    <div id="modalReporte" class="modal">
+    <div class="fixed-action-btn">
+        <a class="btn-mega-pulse modal-trigger" href="#modalReporte">
+            <div class="pulse-wave"></div>
+            <div class="pulse-wave wave-2"></div>
+            <div class="pulse-wave wave-3"></div>
+            <i class="material-icons">priority_high</i>
+        </a>
+    </div>
+    <div id="modalReporte" class="modal" style="border-radius:24px;">
         <div class="modal-content center-align">
             <h5 style="font-family: 'Syncopate';">REPORTAR FALHA</h5>
             <div class="row" style="margin-top: 30px;">
-                <div class="col s6 m3"><div class="report-icon-btn" onclick="selecionarServico('luz', this)"><i class="material-icons">flash_off</i><br>LUZ</div></div>
-                <div class="col s6 m3"><div class="report-icon-btn" onclick="selecionarServico('agua', this)"><i class="material-icons">blur_off</i><br>ÁGUA</div></div>
-                <div class="col s6 m3"><div class="report-icon-btn" onclick="selecionarServico('net', this)"><i class="material-icons">portable_wifi_off</i><br>NET</div></div>
-                <div class="col s6 m3"><div class="report-icon-btn" onclick="selecionarServico('movel', this)"><i class="material-icons">phonelink_erase</i><br>MÓVEL</div></div>
+                <div class="col s6 m3"><div class="report-icon-btn" onclick="selecionarServico('luz', this)" style="cursor:pointer; padding:20px; border:1px solid var(--border); border-radius:15px;"><i class="material-icons">flash_off</i><br>LUZ</div></div>
+                <div class="col s6 m3"><div class="report-icon-btn" onclick="selecionarServico('agua', this)" style="cursor:pointer; padding:20px; border:1px solid var(--border); border-radius:15px;"><i class="material-icons">blur_off</i><br>ÁGUA</div></div>
+                <div class="col s6 m3"><div class="report-icon-btn" onclick="selecionarServico('net', this)" style="cursor:pointer; padding:20px; border:1px solid var(--border); border-radius:15px;"><i class="material-icons">portable_wifi_off</i><br>NET</div></div>
+                <div class="col s6 m3"><div class="report-icon-btn" onclick="selecionarServico('movel', this)" style="cursor:pointer; padding:20px; border:1px solid var(--border); border-radius:15px;"><i class="material-icons">phonelink_erase</i><br>MÓVEL</div></div>
             </div>
         </div>
-        <div class="modal-footer"><a href="#!" class="modal-close btn-flat" style="color:var(--text-main)">Cancelar</a><button onclick="enviarReporte()" class="btn red darken-4">Submeter Alerta</button></div>
+        <div class="modal-footer"><button onclick="enviarReporte()" class="btn red darken-4">Submeter</button></div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <script>
-        const _supabase = supabase.createClient('https://xguvdncjvbxvulnxltgp.supabase.co', 'sb_publishable_1kU-a9PGk5cqnP-Da22bKw_uGGhNrKU');
-        let servicoSelecionado = null;
-
-        function toggleTheme() { document.body.classList.toggle('dark-mode'); }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            M.Modal.init(document.querySelectorAll('.modal'));
-            carregarDistritos();
-        });
-
-        function selecionarServico(servico, elemento) {
-            document.querySelectorAll('.report-icon-btn').forEach(btn => btn.classList.remove('active'));
-            elemento.classList.add('active');
-            servicoSelecionado = servico;
-        }
-
-        function cleanSelect(id, placeholder) {
-            const el = document.getElementById(id);
-            const inst = M.FormSelect.getInstance(el);
-            if (inst) inst.destroy();
-            el.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
-        }
-
-        async function carregarDistritos() {
-            cleanSelect('distrito', 'DISTRITO');
-            let { data } = await _supabase.from('distritos').select('*').order('nome');
-            const s = document.getElementById('distrito');
-            if(data) data.forEach(d => s.add(new Option(d.nome.toUpperCase(), d.id)));
-            M.FormSelect.init(s);
-        }
-
-        document.getElementById('distrito').addEventListener('change', async (e) => {
-            cleanSelect('concelho', 'CONCELHO');
-            cleanSelect('vila', 'VILA OU ALDEIA');
-            let { data } = await _supabase.from('concelhos').select('*').eq('distrito_id', e.target.value).order('nome');
-            const cs = document.getElementById('concelho');
-            if(data) data.forEach(c => cs.add(new Option(c.nome.toUpperCase(), c.id)));
-            M.FormSelect.init(cs);
-            M.FormSelect.init(document.getElementById('vila'));
-        });
-
-        document.getElementById('concelho').addEventListener('change', async (e) => {
-            cleanSelect('vila', 'VILA OU ALDEIA');
-            let { data } = await _supabase.from('localidades').select('*').eq('concelho_id', e.target.value).order('nome');
-            const vs = document.getElementById('vila');
-            if(data) data.forEach(v => vs.add(new Option(v.nome.toUpperCase(), v.id)));
-            M.FormSelect.init(vs);
-        });
-
-        document.getElementById('vila').addEventListener('change', (e) => {
-            atualizarStatusLocalidade(e.target.value);
-        });
-
-        async function atualizarStatusLocalidade(id) {
-            if(!id) return;
-            const umaHoraAtras = new Date(Date.now() - 3600000).toISOString();
-            const { data: reportes } = await _supabase.from('reportes').select('servico').eq('localidade_id', id).gte('data_reporte', umaHoraAtras);
-            const count = { luz: 0, agua: 0, net: 0, movel: 0 };
-            if (reportes) reportes.forEach(r => { if(count[r.servico] !== undefined) count[r.servico]++; });
-
-            ['luz', 'agua', 'net', 'movel'].forEach(s => {
-                const card = document.getElementById(`card-${s}`);
-                const txt = document.getElementById(`status-text-${s}`);
-                card.classList.remove('operational', 'warning', 'outage');
-                if (count[s] >= 5) { card.classList.add('outage'); txt.innerText = `CORTE (${count[s]})`; }
-                else if (count[s] >= 2) { card.classList.add('warning'); txt.innerText = `INSTÁVEL (${count[s]})`; }
-                else { card.classList.add('operational'); txt.innerText = "OPERACIONAL"; }
-            });
-        }
-
-        async function enviarReporte() {
-            const vId = document.getElementById('vila').value;
-            if(!vId || !servicoSelecionado) {
-                M.toast({html: 'Selecione Localidade e Serviço!', classes: 'orange'});
-                return;
-            }
-            const { error } = await _supabase.from('reportes').insert([{ 
-                localidade_id: vId, servico: servicoSelecionado, data_reporte: new Date().toISOString() 
-            }]);
-            if(!error) {
-                M.toast({html: 'Reporte submetido!', classes: 'green'});
-                M.Modal.getInstance(document.getElementById('modalReporte')).close();
-                servicoSelecionado = null;
-                document.querySelectorAll('.report-icon-btn').forEach(btn => btn.classList.remove('active'));
-                atualizarStatusLocalidade(vId);
-            }
-        }
-    </script>
+    <script src="config/config.js"></script>
+    <script src="app/app.js"></script>
 </body>
 </html>

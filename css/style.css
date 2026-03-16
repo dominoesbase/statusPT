@@ -1,0 +1,207 @@
+/* css/style.css */
+:root { 
+    --bg-body: #f8f9fa; 
+    --bg-card: #ffffff; 
+    --text-main: #1a1a1a; 
+    --border: #e9ecef; 
+    --nav-bg: #212121; /* Fundo escuro para Nav e Footer */
+}
+
+body.dark-mode { 
+    --bg-body: #0a0a0a; 
+    --bg-card: #141414; 
+    --text-main: #f8f9fa; 
+    --border: #2d2d2d; 
+    --nav-bg: #111; 
+}
+
+body { 
+    font-family: 'Lexend', sans-serif; 
+    background-color: var(--bg-body); 
+    color: var(--text-main); 
+    transition: 0.4s; 
+    display: flex; 
+    min-height: 100vh; 
+    flex-direction: column; 
+}
+
+main { flex: 1 0 auto; }
+
+/* NAVBAR */
+nav { background-color: var(--nav-bg) !important; box-shadow: none; border-bottom: 1px solid var(--border); padding: 0 20px; }
+nav .brand-logo, nav ul a { color: #ffffff !important; } /* Nav sempre branca para ler bem no fundo escuro */
+
+.brand-logo { font-family: 'Syncopate', sans-serif; font-weight: 700; letter-spacing: 2px; }
+.sidenav { background-color: var(--bg-card); width: 280px; }
+.sidenav li a { color: var(--text-main) !important; }
+
+/* ALERTA */
+.alert-bar {
+    background-color: #d32f2f;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* HERO */
+
+/* HERO SECTION - Enquadramento e Espaçamento */
+.hero-search { 
+    padding: 80px 0 60px 0; /* Aumentei em cima, diminuí em baixo */
+    background: var(--bg-card); 
+    border-bottom: 1px solid var(--border); 
+    text-align: center; /* Centra o conteúdo para um ar mais moderno */
+}
+
+.hero-title-container { 
+    margin: 0 auto; 
+    max-width: 850px; 
+    padding: 0 20px;
+}
+
+.hero-title-main { 
+    font-family: 'Syncopate', sans-serif; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    font-size: 2.4rem; 
+    font-weight: 700; 
+    color: var(--text-main); 
+    line-height: 1.2;
+    margin-bottom: 10px; /* Espaço para o subtítulo */
+}
+
+/* Subtítulo para dar contexto */
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    opacity: 0.6;
+    margin-bottom: 40px; /* Espaço até aos filtros */
+}
+/* CARDS STATUS */
+.status-card { background: var(--bg-card); border: 2px solid var(--border); padding: 40px 10px; border-radius: 24px; transition: 0.3s; margin-top: -60px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.waiting { color: #9e9e9e; border-color: #bdbdbd; opacity: 0.6; border-style: dashed; }
+.operational { color: #2e7d32; border-color: #2e7d32; border-style: solid; }
+.warning { color: #f57c00; border-color: #f57c00; border-style: solid; }
+.outage { color: #d32f2f; border-color: #d32f2f; border-style: solid; }
+
+/* MEGA PULSE BUTTON */
+.fixed-action-btn { overflow: visible !important; }
+.btn-mega-pulse { width: 80px !important; height: 80px !important; background-color: #ff0000 !important; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; border: none; }
+.btn-mega-pulse i { font-size: 45px !important; color: #ffffff !important; line-height: 80px !important; }
+
+.pulse-wave { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; background-color: rgba(255, 0, 0, 0.5); border-radius: 50%; z-index: -1; animation: wave-animation 2s infinite; }
+.wave-2 { animation-delay: 0.6s; }
+.wave-3 { animation-delay: 1.2s; }
+@keyframes wave-animation { 0% { width: 80px; height: 80px; opacity: 0.8; } 100% { width: 300px; height: 300px; opacity: 0; } }
+
+/* DARK MODE SELECTS */
+body.dark-mode .select-wrapper input.select-dropdown { color: #ffffff !important; border-bottom: 1px solid var(--border) !important; }
+body.dark-mode .select-wrapper .caret { fill: #ffffff !important; }
+body.dark-mode .dropdown-content { background-color: #1a1a1a !important; }
+body.dark-mode .dropdown-content li > span { color: #ffffff !important; }
+
+/* MODAL & REPORTE */
+.modal { background-color: var(--bg-card) !important; color: var(--text-main) !important; }
+.report-icon-btn { cursor: pointer; padding: 20px; border: 1px solid var(--border); border-radius: 15px; transition: 0.3s; color: var(--text-main) !important; text-align: center; }
+
+/* =========================================
+   FOOTER - LEITURA OTIMIZADA
+   ========================================= */
+.page-footer { 
+    background-color: var(--nav-bg) !important; 
+    padding: 50px 0 20px 0; 
+    border-top: 1px solid var(--border); 
+}
+
+/* Forçar todos os textos dentro do footer a serem claros */
+.page-footer .white-text { 
+    color: #ffffff !important; 
+    display: block;
+    margin-bottom: 15px;
+}
+
+.page-footer p { 
+    color: #bdbdbd !important; /* Cinza claro para descrição */
+}
+
+/* Links no Footer */
+.footer-links li { margin-bottom: 8px; }
+.footer-links a {
+    color: #9e9e9e !important; /* Cinza para links inativos */
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    color: #ffffff !important; /* Branco ao passar o rato */
+}
+
+.footer-copyright {
+    background-color: rgba(0,0,0,0.2) !important;
+    margin-top: 30px;
+    padding: 15px 0;
+}
+
+.footer-copyright .grey-text {
+    color: #888888 !important;
+}
+
+/* Reset Global de Links para o resto do site */
+a:not(.footer-links a):not(.btn-mega-pulse) {
+    color: var(--text-main);
+    text-decoration: none;
+}
+
+/* Remove o espaço irritante e as margens automáticas do copyright */
+.footer-copyright {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    margin-top: 0 !important; /* Remove a margem superior que cria o buraco */
+    padding: 15px 0 !important;
+    min-height: auto !important; /* Impede que o Materialize force uma altura fixa */
+}
+
+/* Garante que o container do copyright não tenha padding extra */
+.footer-copyright .container {
+    margin-bottom: 0 !important;
+}
+
+/* Otimização para o rodapé colar sempre em baixo sem espaços fantasmas */
+.page-footer { 
+    background-color: var(--nav-bg) !important; 
+    padding: 40px 0 0 0 !important; /* 0 no fundo para o copyright encostar */
+    border-top: 1px solid var(--border); 
+}
+
+/* CORREÇÃO DO MENU HAMBURGUER E NAVBAR */
+nav .sidenav-trigger i {
+    color: #ffffff !important; /* Força o ícone a ser branco na barra preta */
+}
+
+/* RESPONSIVE DOS CARDS (RETÂNGULOS) */
+@media (max-width: 992px) {
+    .status-card {
+        margin-top: 20px !important; /* Remove o overlap negativo em mobile */
+        margin-bottom: 20px;
+        padding: 20px 10px !important;
+    }
+    .hero-search {
+        padding: 40px 0 !important;
+    }
+    .hero-title-main {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* ESTILO DOS GRÁFICOS DENTRO DOS CARDS */
+.chart-container {
+    position: relative;
+    margin-top: 15px;
+    height: 80px; /* Gráfico pequeno e elegante */
+    width: 100%;
+}
+
+
