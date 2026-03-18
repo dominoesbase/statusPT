@@ -204,4 +204,82 @@ nav .sidenav-trigger i {
     width: 100%;
 }
 
+/* Estados da Barra Dinâmica */
+.alert-danger { background-color: #d32f2f !important; color: white !important; }
+.alert-warning { background-color: #f57c00 !important; color: white !important; }
+.alert-success { background-color: #2e7d32 !important; color: white !important; }
 
+/* Animação de pulso para alertas críticos */
+.alert-pulse {
+    animation: alert-blink 2s infinite;
+}
+
+@keyframes alert-blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Ajuste do Logo para Mobile */
+@media only screen and (max-width: 992px) {
+    .brand-logo {
+        font-size: 1.2rem !important; /* Texto ligeiramente menor em mobile */
+        left: 55% !important; /* Empurra um pouco para a direita para dar espaço ao menu */
+        transform: translateX(-50%) !important;
+        white-space: nowrap;
+    }
+}
+
+/* Garante que o ícone do menu não desapareça */
+.sidenav-trigger {
+    display: block !important;
+}
+
+/* logo a esquerda */
+@media only screen and (max-width: 600px) {
+    nav .brand-logo {
+        margin-left: 15px;
+        position: relative !important;
+        left: 0 !important;
+        transform: none !important;
+        display: inline-block;
+    }
+}
+
+/* Corrigir o menu lateral no Dark Mode */
+body.dark-mode .sidenav {
+    background-color: var(--bg-card) !important;
+}
+
+body.dark-mode .sidenav li a {
+    color: var(--text-main) !important;
+}
+
+/* Forçar a cor branca nos ícones dentro do menu lateral no Dark Mode */
+body.dark-mode .sidenav li a i.material-icons {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Divisória do menu lateral no Dark Mode */
+body.dark-mode .sidenav .divider {
+    background-color: var(--border) !important;
+}
+
+/* Ajuste do nome do projeto dentro do menu no Dark Mode */
+body.dark-mode .sidenav .user-view .name {
+    color: var(--text-main) !important;
+}
+
+/* Garante que o gatilho do menu lateral desaparece em ecrãs grandes (Desktop) */
+@media only screen and (min-width: 993px) {
+    .sidenav-trigger {
+        display: none !important;
+    }
+}
+
+/* Ajuste para o logo não ficar encostado à esquerda no Desktop */
+@media only screen and (min-width: 993px) {
+    nav .brand-logo {
+        margin-left: 0;
+    }
+}
